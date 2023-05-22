@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+.myLink {display: none}
+</style>
+</head>
+<body class="light-grey">
+
+<div id="collapsable-sidebar" class="w3-sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-times"></i></a>
+  <a href="#">Home</a>
+  <a href="/profile">Profile</a>
+  <a href="/logout">Log Out</a>
+</div>
+
+<div id="main" style="padding-top: 80px">
+  <!-- Support Window -->
+  <div id="support-window">
+    <div id="support-chat" class="support-chat-content">|
+      <div id="s-output"></div>
+      <div id="u-input">
+        <input class="chat-input" type="text" placeholder="What is your question?">
+        <a href="#" class="send-icon" onclick=""><i class="fa fa-paper-plane"></i></a>
+      </div>
+    </div>
+    <button onclick="openChat()" id="sup-but" class="w3-red my-button" title="Ask for help!">Need help?</button>
+  </div>
+  <!-- Navigation Bar -->
+  <div class="w3-top">
+    <div class="h-bar color-white border-bot xlarge">
+    <a href="#" class="h-bar-item my-button hover-red text-grey" onclick="openNav()"><i class="fa fa-bars" style="padding-top: 10px"></i></a>
+    <a href="/" class="h-bar-item my-button float-right text-red"><img src="{{ url_for('static', filename='pics/logo.png') }}" alt="logo" width="100" style="padding-top: 10px"></a>
+  </div>
+  </div>
+
+  <!-- Header -->
+  <header class="display-container my-content hide-small" style="max-width:1500px">
+    <img class="imported-image" src="{{ url_for('static', filename='pics/london2.jpg') }}" alt="London" width="1500" height="700">
+    <div class="display-middle" style="width:65%">
+      <div class="h-bar color-black">
+        <button class="h-bar-item my-button tablink" onclick="openLink(event, 'Flight');"><i class="fa fa-plane margin-right"></i>Flight</button>
+  <!--      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Hotel');"><i class="fa fa-bed w3-margin-right"></i>Hotel</button>-->
+  <!--      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Car');"><i class="fa fa-car w3-margin-right"></i>Rental</button>-->
+      </div>
+
+      <!-- Tabs -->
+      <form method="POST" autocomplete="off" id="Flight" class="my-container color-white padding-16 myLink">
+        <h3>Travel the world with us</h3>
+        <div class="row-padding" style="margin:0 -16px;">
+          <div class="half-w">
+{#            <label>From</label>#}
+            <div class="autocomplete">
+                <input name="orig" id="myInput" class="my-input b-border" type="text" placeholder="Departing from" required>
+            </div>
+            <input name="date1" class="my-input b-border w3-margin-top" type="date" required>
+          </div>
+          <div class="half-w">
+{#            <label>To</label>#}
+            <div class="autocomplete">
+                <input name="dest" id="myInput2" class="my-input b-border" type="text" placeholder="Arriving at" required>
+            </div>
+            <input name="date2" class="my-input b-border w3-margin-top" type="date">
+          </div>
+        </div>
+        <p><button type="submit" class="my-button w3-red float-right">Search and find dates</button></p>
+      </form>
+    </div>
+  </header>
+
+{#  <!-- Page content -->#}
+  <div class="my-content" style="max-width:1100px;">
+      <div class="my-container w3-card color-white margin-bottom">
+          {% if flights %}
+              <hr>
+          {% endif %}
+
+          {% for flight in flights %}
+
+              <div class="my-container">
+                  <h5 class="less-opacity"><b>{{ flight.flight_orig.name }} ({{ flight.origin }}) <i class="fa fa-long-arrow-right fa-fw"></i>
+                      {{ flight.flight_dest.name }} ({{ flight.destination }})</b></h5>
+                  <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>{{ flight.check_in }} -
+                      {{ flight.take_off }}</h6>
+                  <p>Plane: {{ flight.plane.producer }} {{ flight.plane.model }}; Duration: {{ flight.duration }}</p>
+                  <button type="button" class="close" onClick="addFlight({{ flight.id }}, {{ user.id }})">
+                    <span aria-hidden="true">Book</span>
+                  </button>
+                  <hr>
+              </div>
+
+          {% endfor %}
+
+      </div>
+  </div>
+
+  <div class="my-container">
+    <h2>Contact</h2>
+    <p>Let us book your next trip!</p>
+    <i class="fa fa-map-marker" style="width:30px"></i> Eindhoven, NL<br>
+    <i class="fa fa-phone" style="width:30px"></i> Phone: +31 123456789<br>
+    <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
+    <form action="/action_page.php" target="_blank">
+      <p><input class="my-input padding-16 b-border" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="my-input padding-16 b-border" type="text" placeholder="Email" required name="Email"></p>
+      <p><input class="my-input padding-16 b-border" type="text" placeholder="Message" required name="Message"></p>
+      <p><button class="my-button color-black padding-large" type="submit">SEND MESSAGE</button></p>
+    </form>
+  </div>
+
+  <!-- End page content -->
+
+
+  <!-- Footer -->
+  <footer class="my-container content-center less-opacity margin-bottom">
+    <h5>Find Us On</h5>
+    <div class="xlarge padding-16">
+      <i class="fa fa-facebook-official hover-opacity"></i>
+      <i class="fa fa-instagram hover-opacity"></i>
+      <i class="fa fa-snapchat hover-opacity"></i>
+      <i class="fa fa-pinterest-p hover-opacity"></i>
+      <i class="fa fa-twitter hover-opacity"></i>
+      <i class="fa fa-linkedin hover-opacity"></i>
+    </div>
+  <!--  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>-->
+  </footer>
+
+</div>
+
+<script>
+// Tabs
+function openLink(evt, linkName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("myLink");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(linkName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+
+// Click on the first tablink on load
+document.getElementsByClassName("tablink")[0].click();
+
+function openNav() {
+  document.getElementById("collapsable-sidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("collapsable-sidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+}
+
+function openChat() {
+  document.getElementById("support-chat").classList.toggle("show");
+}
+
+function closeChat() {
+  var dropdowns = document.getElementsByClassName("support-chat-content");
+  var i;
+  for (i = 0; i < dropdowns.length; i++) {
+    var openDropdowns = dropdowns[i];
+    if (openDropdowns.classList.contains('show')) {
+      openDropdowns.classList.remove('show');
+    }
+  }
+}
+
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+
+var a = {{ arr|tojson }}
+
+autocomplete(document.getElementById("myInput"), a);
+autocomplete(document.getElementById("myInput2"), a);
+
+function addFlight(flightID, userID) {
+  fetch("/add-flight", {
+    method: "POST",
+    body: JSON.stringify({ flightID: flightID, userID: userID }),
+  }).then((_res) => {
+    window.location.href = "/profile";
+  });
+}
+
+</script>
+
+</body>
+</html>
