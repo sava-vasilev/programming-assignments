@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href= "{{ url_for('static',filename='registerpage.css') }}">
+        <title> Media Sotrage Service </title>
+    </head>
+    
+    <body>
+        <body>
+            <div class="register-page">
+                <div class="form">
+                    <div class="register">
+                        <div class="register-header">
+                            <h3>Register</h3>
+                            <p>Please fill the textboxes to register.</p>
+                        </div>
+                    </div>
+                
+                    <form class="register-form" method = "post" onsubmit="return checkform(this)">
+                        <input type="text" placeholder="First name" name="first_name"/>
+                        <input type="text" placeholder="Last name" name="last_name"/>
+                        <input type="text" placeholder="Username" name="username"/>
+                        <input type="password" placeholder="Password" name="password"/>
+                        <input type="text" placeholder="Email address" name="email_address"/>
+                        <input type="text" placeholder="Phone number" name="phone_number"/>
+                        <input class="checkbox" type="checkbox" id="checkbox" name="checkbox" value="checkbox">
+                        <label class="checkbox" id="message" for="checkbox"> Agree with terms and conditions </label>
+                        <input id="register" type="submit" value="Register" name="register-btn" text="submit">
+                        <p style='color:red' class="message">{{ message }}</p>
+                    </form>
+
+                    <!-- <script>
+                        function checkform(form){
+                            if(!form.checkbox.checked){
+                                
+                                return false;
+                            }
+                            return true;
+                        }
+                    </script> -->
+                </div>
+            </div>
+        </body>
+    </body>
+    
+</html>

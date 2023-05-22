@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='head_bar.css') }}">
+        <title> Media Storage Service </title>
+    </head>
+
+    <body>
+
+        <div class="topnav">
+
+            <div class="dropdown">
+                
+                <button class="dropbtn">Home 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content">
+                  <a href="accountPage">Account</a>
+                  <a href="/">Log out</a>
+                </div>
+
+            </div> 
+           
+            <div class="search-container">
+                
+                <form action="http://localhost:5000/userPage" method = "POST" enctype = "multipart/form-data">
+                    <div class="button">
+                        <input type = "file" name = "file" />
+                        <input type = "submit"/>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+
+        <div id="list" style="padding-left:16px">
+           
+            <h1>Your Files</h1>
+           
+            <ul>
+
+                <p>
+                    {{ error_message }}
+                </p>
+
+                {% for file in files %}
+                
+                <li>
+                    <a href="{{ (request.path + '/' if request.path != '/' else '') + file }}">
+                        {{ file }}
+                    </a>
+                    
+                    <a href="{{ (request.path + '/delete/' if request.path != '/' else '') + file }}">
+                        &nbsp;&nbsp;&nbsp;&nbsp; Delete this file.
+                    </a>
+                    
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <div id="aboutUs">
+            <ul>
+                <li>
+                    <div>
+                        <h3> App Info </h3>
+                            <p><strong>Note:</strong> To use the app you must have docker <br> install on your system</p>
+                            <p><strong>Note:</strong> Тhe application is still under development.<br> Some of the fucntions are not availble at this moment</p>
+                    </div>
+                </li> 
+
+                <li>
+                    <div>
+                        <h3>About Us</h3>
+                            <P>Case Study 2 - Group 10</P>
+                            <p>Members: Kaloyan Andreev <br> Sava Vasilev <br> Francisco Marcó
+                        </p>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <h3>Contact</h3>
+                            <p>For contact with the developers of the app <br> use any of the emails below:</p>
+                            <P>k.andreev@student.fontys.nl <br> f.marco@student.fontys.nl <br> s.vasilev@student.fontys.nl</P> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </body>
+</html>

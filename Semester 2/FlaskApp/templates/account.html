@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='accountpage.css') }}">
+        <title> Media Storage Service </title>
+    </head>
+
+    <body>
+
+        <div class="topnav">
+
+            <div class="dropdown">
+
+                <button class="dropbtn">Account 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content">
+                  <a href="userPage">Home</a>
+                  <a href="/">Log out</a>
+                </div>
+
+            </div> 
+           
+        </div>
+
+        <div id="accountInfo" style="padding-left:16px">
+            
+            <h1>Account datails</h1>
+            
+            <ul>
+
+                <li>
+                    <div>
+                        <h3>Username</h3>
+                        <p>{{ username }}</p>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <h3>First name</h3>
+                        <p>{{ first_name }}</p>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <h3>Last name</h4>
+                        <p>{{ last_name }}</p>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <h3>Email address</h3>
+                        <p>{{ email_address }}</p>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <h3>Phone number</h3>
+                        <p>{{ phone_number }}</p>
+                    </div>
+                </li>
+
+            </ul> 
+
+        </div>
+
+        <div id="aboutUs">
+            <ul>
+                <li>
+                    <div>
+                        <h3> App Info </h3>
+                            <p><strong>Note:</strong> To use the app you must have docker <br> install on your system</p>
+                            <p><strong>Note:</strong> Тhe application is still under development.<br> Some of the fucntions are not availble at this moment</p>
+                    </div>
+                </li> 
+
+                <li>
+                    <div>
+                        <h3>About Us</h3>
+                            <P>Case Study 2 - Group 10</P>
+                            <p>Members: Kaloyan Andreev <br> Sava Vasilev <br> Francisco Marcó
+                        </p>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <h3>Contact</h3>
+                            <p>For contact with the developers of the app <br> use any of the emails below:</p>
+                            <P>k.andreev@student.fontys.nl <br> f.marco@student.fontys.nl <br> s.vasilev@student.fontys.nl</P> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </body>
+</html>
