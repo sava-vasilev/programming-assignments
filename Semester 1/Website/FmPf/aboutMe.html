@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>About me</title>
+        <link rel="stylesheet" href="aboutMe.css" type="text/css">
+        <link rel="shortcut icon" href="pics/pog.ico" type="image/x-icon">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="index.html"><b>PORTFOLIO</b></a>
+                <span class="map">> About me</span>
+            </div>
+
+            <ul class="nav">
+                <li><a href="index.html" class="nava">Home</a></li>
+                <li>&nbsp;|&nbsp;</li>
+                <li><a href="projects.html" class="nava">Projects</a></li>
+                <li>&nbsp;|&nbsp;</li>
+                <li><a href="aboutMe.html" class="nava">About me</a></li>
+            </ul>
+        </header>
+        <div class="content">
+            <div class="grid-item" id="txt">
+                <p class="grid-item-content">
+                    My name is Sava Vasilev and i am 20 y.o. I come from Bulgaria but for the past two years I've spend most of my time in the Netherlands.
+                     I currently study ICT & Infrastructure at Fontys University of Applied Sciences. I do however have prior experience so to say with 
+                     Computer Science that being said none of it is professional. I did one year of CSE in TU Delft and also have attended different courses 
+                     for programming in different languages. On the side I like studying new languages and photography. I currently can speak apart 
+                     from Bulgarian of course English, German and a little bit of French. <br><br>
+                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus viverra 
+                     adipiscing at in tellus. Proin gravida hendrerit lectus a. Augue lacus viverra vitae congue eu consequat ac felis. Tincidunt dui ut ornare 
+                     lectus sit amet. Orci eu lobortis elementum nibh tellus molestie. Lobortis scelerisque fermentum dui faucibus in ornare quam viverra. 
+                </p>
+            </div>
+            <div class="grid-item" id="right-grid">
+                <div class="secondary-grid-item" id="pic">
+                    <div style="text-align: center;"><img src="pics/me.jpg" alt="me"></div>
+                </div>
+                <div class="secondary-grid-item" id="contact-me">
+                    <!-- <div class="contact"><a class="links" href="#">Facebook</a></div>
+                    <div class="contact"><a class="links" href="#"></a>Instagram</div>
+                    <div class="contact"><a class="links" href="#"></a>Discord</div>
+                    <div class="contact"><a class="links" href="#"></a>Gmail</div> -->
+                    <a class="links1" href="https://www.facebook.com/sava.vasilev.1" target="_blank"><div class="contact">Facebook</div></a>
+                    <a class="links2" href="https://www.instagram.com/savavasilev/?hl=en" target="_blank"><div class="contact">Instagram</div></a>
+                    <div class="links3" onmouseover="changeText('disc', 'n0_0ne#0844')" onmouseout="changeback('disc', 'Discord')" onclick="copy('disc')" href="#"><div class="contact" id="disc">Discord</div></div>
+                    <div class="links4" onmouseover="changeText('gm', 'sa.vasilev0@gmail.com')" onmouseout="changeback('gm', 'Gmail')" onclick="copy('gm')" href="#"><div class="contact" id="gm">Gmail</div></div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p class="tag">@eSVy</p>
+        </footer>
+        <script>
+            function changeText(el ,text){
+                var display = document.getElementById(el);
+                display.innerHTML = "";
+                display.innerHTML = text;
+            }
+
+            function changeback(el, text){
+                var display = document.getElementById(el);
+                display.innerHTML = "";
+                display.innerHTML = text;
+            }
+
+            // two functions and line 40 and 41 contain code copied from:https://stackoverflow.com/a/24719537/14195050
+
+            function copy(el){
+                var display = document.getElementById(el);
+                navigator.clipboard.writeText(display.innerHTML);
+            }
+        
+        </script>
+    </body>
+</html>

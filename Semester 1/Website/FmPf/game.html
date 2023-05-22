@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Projects > Game</title>
+        <link rel="stylesheet" href="game.css" type="text/css">
+        <link rel="shortcut icon" href="pics/pog.ico" type="image/x-icon">
+        <!-- <script src="game.js"></script> -->
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="index.html"><b>PORTFOLIO</b></a>
+                <span class="map">> <a href="projects.html">Projects</a>
+                     > Game</span>
+            </div>
+
+            <ul class="nav">
+                <li><a href="index.html" class="nava">Home</a></li>
+                <li>&nbsp;|&nbsp;</li>
+                <li><a href="projects.html" class="nava">Projects</a></li>
+                <li>&nbsp;|&nbsp;</li>
+                <li><a href="aboutMe.html" class="nava">About me</a></li>
+            </ul>
+        </header>
+        <div class="content">
+            <div class = "grid-item">
+                <div style="text-align: center;">Number Guessing Game</div>
+                <hr>
+                <p>This little game I made is actually an assignment from the 3rd quarter of my 
+                    first year in TU Delft. It was given to me as a preparation for an exam for 
+                    the CSE1500 course. <br> <br>
+                    The "game" is prety much straight forward. A random number is generated and 
+                    you have ten tries to guess the number. Of course in order to make it easier 
+                    the game will tell you if your number is higher or lower. <br> <br>
+                    Thu purpose of this assignment wasn't to demonstrate some superious game
+                    developement skills but to learn how to manipulate the DOM with JavaScript code.
+                </p>
+            </div>
+            <div class = "grid-item">
+                <div style="text-align: center;">How it works</div>
+                <hr>
+                <h3>Variables</h3>
+                <p>
+                    First, using the Math library, a random number is generated and assignet to a 
+                    variable. After that all the needed elements from the DOM are assigned to a const
+                    and stored for further use. Last but not least the counter and the reset button are
+                    initialized and the text field for guessing is put on focus. <br>
+                </p>
+                <h3>Methods</h3>
+                <p>There are 3 main methods: checkGuess, setGameOver, resetGame. <br>
+                    The first one checks if the input answer is correct (if the text box is empty the 
+                    default is 1) and adds the respective elements - Wrong + Higher/Lower or Correct +
+                    setGameOver. <br> Speaking of... This method disables all the inputs and adds a reset
+                    button. The reset button uses the last method - resetGame - which removes the reset 
+                    button and enables again the inputs. <br>
+                    Some secondary methods that are being used are the listeners for buttonclicks or keystrokes.
+                </p>
+            </div>
+            <div class = "grid-item" id="demo">
+                <h1>Number guessing game</h1>
+
+                <p>We have selected a random number between 1 and 100. See if you can guess it in 10 
+                    turns or fewer. We'll tell you if your guess was too high or too low.</p>
+
+                <div class="form">
+                    <label for="guessField">Enter a guess: </label>
+                    <input type="text" id="guessField" class="guessField">
+                    <input type="submit" value="Submit guess" class="guessSubmit">
+                </div>
+
+                <div class="resultParas">
+                    <p class="guesses"></p>
+                    <p class="lastResult"></p>
+                    <p class="lowOrHi"></p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p class="tag">@eSVy</p>
+        </footer>
+        <script>
+
+            // alert('gimmi cookies senpai ^^');
+    
+            let randomNumber = Math.floor(Math.random() * 100) + 1;
+    
+            const guesses = document.querySelector('.guesses');
+            const lastResult = document.querySelector('.lastResult');
+            const lowOrHi = document.querySelector('.lowOrHi');
+    
+            const guessSubmit = document.querySelector('.guessSubmit');
+            const guessField = document.querySelector('.guessField');
+    
+            let guessCount = 1;
+            let resetButton;
+            guessField.focus();
+    
+            function checkGuess() {
+                let userGuess = Number(guessField.value);
+                if (guessCount === 1) {
+                    guesses.textContent = 'Previous guesses: ';
+                }
+                guesses.textContent += userGuess + ' ';
+    
+                if (userGuess === randomNumber) {
+                    lastResult.textContent = 'Congratulations! You got it right!';
+                    lastResult.style.backgroundColor = '#7AC74F';
+                    lowOrHi.textContent = '';
+                    setGameOver();
+                } else if (guessCount === 10) {
+                    lastResult.textContent = '!!!GAME OVER!!!';
+                    setGameOver();
+                } else {
+                    lastResult.textContent = 'Wrong!';
+                    lastResult.style.backgroundColor = '#e44e3e';
+                    if(userGuess < randomNumber) {
+                    lowOrHi.textContent = 'Last guess was too low!';
+                    } else if(userGuess > randomNumber) {
+                    lowOrHi.textContent = 'Last guess was too high!';
+                    }
+                }
+    
+                guessCount++;
+                guessField.value = '';
+                guessField.focus();
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if(event.keyCode === 13) {
+                    if(guessSubmit.disabled) {
+                        resetGame();
+                    } else {
+                        checkGuess();
+                    }
+                }
+            });
+    
+            guessSubmit.addEventListener('click', checkGuess);
+    
+            function setGameOver() {
+                guessField.disabled = true;
+                guessSubmit.disabled = true;
+                resetButton = document.createElement('button');
+                resetButton.textContent = 'Start new game';
+                document.getElementById("demo").appendChild(resetButton)
+                // document.body.append(resetButton);
+                resetButton.addEventListener('click', resetGame);
+            }
+    
+            function resetGame() {
+                guessCount = 1;
+    
+                const resetParas = document.querySelectorAll('.resultParas p');
+                for (let i = 0 ; i < resetParas.length ; i++) {
+                    resetParas[i].textContent = '';
+                }
+    
+                resetButton.parentNode.removeChild(resetButton);
+    
+                guessField.disabled = false;
+                guessSubmit.disabled = false;
+                guessField.value = '';
+                guessField.focus();
+    
+                lastResult.style.backgroundColor = 'white';
+    
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+            }
+    
+        </script>
+    </body>
+</html>

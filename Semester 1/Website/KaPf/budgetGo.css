@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: Roboto;
+    background-color: #fcdbc8;
+    background-image: url("pics/199822.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    margin: auto;
+    max-width: 2307px;
+    color: #fcdbc8;
+}
+
+header{
+    background-color: #424161;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.map{
+    font-size: 14px;
+}
+
+span a:hover{
+    text-decoration: underline;
+}
+
+ul.nav{
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 10px;
+}
+
+a{
+    color: #fcdbc8;
+    text-decoration: none;
+}
+
+.nava:hover{
+    background-color: #fcdbc8;
+    color: #424161;
+}
+
+.content {
+    margin: 50px;
+    /* border: 2px solid #e44e3e; */
+    display: grid;
+    grid-template-columns: auto;
+    position: relative;
+    row-gap: 20px;
+    align-items: center;
+    font-size: 25px;
+}
+
+.grid-item{
+    color: #fcdbc8;
+    background-color: #424161;
+    justify-content: space-between;
+    opacity: 90%;
+    padding: 20px;
+    position: relative;
+    max-width: 100%;
+}
+
+.pic-item{
+    width: 100%;
+}
+
+#pics{
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 20px;
+    /* display: flex;
+    justify-content: space-between; */
+}
+
+#result{
+    display: flex;
+}
+
+.result-title{
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    padding: 328.5px;
+}
+
+footer{
+    background-color: #424161;
+    text-align: right;
+    position: fixed;
+    width: 100%;
+    max-width: 2307px;
+    bottom: 0;
+    margin: 0;
+}
+
+.tag{
+    margin: 1.5px;
+}
+
